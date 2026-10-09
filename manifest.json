@@ -1,0 +1,32 @@
+{
+  "manifest_version": 3,
+  "name": "Wiki Masters QoL – Prix du marché",
+  "version": "0.8.5",
+  "description": "Mémorise le prix moyen du marché de tes cartes Wiki Masters et permet de trier ta collection par prix. Aucune automatisation : l'extension lit seulement ce que le site affiche.",
+  "permissions": ["storage"],
+  "host_permissions": [
+    "https://www.wiki-masters.com/*",
+    "https://wiki-masters.com/*",
+    "https://*.wikipedia.org/*",
+    "https://*.wikimedia.org/*"
+  ],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://www.wiki-masters.com/*", "https://wiki-masters.com/*"],
+      "js": ["inject.js"],
+      "run_at": "document_start",
+      "world": "MAIN"
+    },
+    {
+      "matches": ["https://www.wiki-masters.com/*", "https://wiki-masters.com/*"],
+      "js": ["content.js"],
+      "css": ["styles.css"],
+      "run_at": "document_idle"
+    }
+  ]
+}
+

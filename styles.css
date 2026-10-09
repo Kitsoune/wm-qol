@@ -1,0 +1,390 @@
+.wmq-badge {
+  position: absolute;
+  left: 6px;
+  bottom: 6px;
+  z-index: 5;
+  padding: 2px 7px;
+  border-radius: 999px;
+  background: rgba(12, 13, 12, 0.88);
+  color: #34d399;
+  font: 700 12px/1.4 system-ui, sans-serif;
+  border: 1px solid rgba(52, 211, 153, 0.5);
+  pointer-events: none;
+}
+
+#wmq-bar {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 2147483000;
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  padding: 8px 10px;
+  background: rgba(12, 13, 12, 0.94);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 12px;
+  color: #e5e7eb;
+  font: 600 12px/1.2 system-ui, sans-serif;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.5);
+}
+
+#wmq-bar button {
+  cursor: pointer;
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: #1f2937;
+  color: #e5e7eb;
+  font: inherit;
+}
+
+#wmq-bar button:hover { background: #374151; }
+#wmq-bar button.on { background: #34d399; color: #052e22; border-color: #34d399; }
+#wmq-bar .wmq-count { opacity: 0.7; font-weight: 500; }
+
+.wmq-toast {
+  position: fixed;
+  right: 16px;
+  bottom: 70px;
+  z-index: 2147483001;
+  max-width: 340px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: #1f2937;
+  color: #e5e7eb;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  font: 600 13px/1.4 system-ui, sans-serif;
+  white-space: pre-line;
+  cursor: pointer;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.5);
+}
+.wmq-toast.err { background: #7f1d1d; border-color: #f87171; color: #fee2e2; }
+
+#wmq-bar { flex-wrap: wrap; max-width: calc(100vw - 32px); justify-content: flex-end; }
+
+#wmq-top {
+  display: none;
+  position: fixed;
+  right: 16px;
+  bottom: 70px;
+  z-index: 2147483000;
+  width: 340px;
+  max-height: 60vh;
+  overflow-y: auto;
+  background: rgba(12, 13, 12, 0.97);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 12px;
+  color: #e5e7eb;
+  font: 500 13px/1.4 system-ui, sans-serif;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.55);
+}
+#wmq-top .wmq-top-head {
+  position: sticky;
+  top: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  background: #111;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  font-weight: 700;
+}
+#wmq-top .wmq-top-head button {
+  cursor: pointer; border: 0; background: transparent; color: #9ca3af; font-size: 14px;
+}
+#wmq-top .wmq-top-empty { padding: 14px 12px; opacity: 0.7; }
+#wmq-top ol { margin: 0; padding: 6px 0; list-style: decimal inside; }
+#wmq-top li { display: flex; gap: 8px; align-items: baseline; padding: 4px 12px; }
+#wmq-top li::marker { color: #6b7280; }
+#wmq-top .wmq-top-name { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+#wmq-top .wmq-top-rar { font-size: 11px; opacity: 0.6; }
+#wmq-top .wmq-top-price { color: #34d399; font-weight: 700; }
+
+/* v0.5 : barre repliable, onglets, doublons */
+#wmq-bar { flex-wrap: nowrap; align-items: center; gap: 8px; }
+#wmq-bar .wmq-inner { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; justify-content: flex-end; max-width: calc(100vw - 96px); }
+#wmq-bar.collapsed { padding: 4px; border-radius: 999px; }
+#wmq-bar.collapsed .wmq-inner { display: none; }
+#wmq-bar .wmq-logo {
+  position: relative; flex: none; width: 34px; height: 34px; padding: 0; border-radius: 50%;
+  display: grid; place-items: center; overflow: hidden; background: #0c0d0c; border-color: #34d399; color: #34d399; font-weight: 800; font-size: 15px;
+}
+#wmq-bar .wmq-logo img { position: absolute; inset: 5px; width: 24px; height: 24px; object-fit: contain; }
+#wmq-bar .wmq-logo.busy { animation: wmq-pulse 1.2s ease-in-out infinite; }
+@keyframes wmq-pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.6); } 50% { box-shadow: 0 0 0 6px rgba(52, 211, 153, 0); } }
+
+#wmq-top .wmq-top-head { flex-direction: column; align-items: stretch; gap: 8px; }
+#wmq-top .wmq-top-row { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+#wmq-top .wmq-tabs { display: flex; gap: 6px; }
+#wmq-top .wmq-tabs button {
+  cursor: pointer; padding: 4px 10px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.18);
+  background: #1f2937; color: #e5e7eb; font: 600 12px system-ui, sans-serif;
+}
+#wmq-top .wmq-tabs button.on { background: #34d399; color: #052e22; border-color: #34d399; }
+#wmq-top .wmq-top-x { color: #fbbf24; font-weight: 700; }
+
+/* v0.5.1 : badge prix centré en bas (entre ATK et DEF), badge doublon en haut à droite */
+.wmq-badge {
+  left: 50%; right: auto; bottom: 12px; transform: translateX(-50%);
+  padding: 1px 7px; font-size: 11px; white-space: nowrap;
+}
+.wmq-badge.wmq-dup {
+  left: auto; right: 6px; top: 6px; bottom: auto; transform: none;
+  color: #fbbf24; border-color: rgba(251, 191, 36, 0.6);
+}
+
+/* v0.6 : estimation du compte */
+#wmq-stats {
+  display: inline-flex; gap: 8px; align-items: stretch; margin-left: 18px; vertical-align: middle;
+  font: 500 13px/1.2 system-ui, sans-serif; letter-spacing: 0; text-transform: none; cursor: pointer;
+}
+#wmq-stats .wmq-st {
+  display: flex; flex-direction: column; gap: 2px; padding: 5px 12px; border-radius: 10px;
+  background: rgba(52, 211, 153, 0.10); border: 1px solid rgba(52, 211, 153, 0.35);
+}
+#wmq-stats:hover .wmq-st { background: rgba(52, 211, 153, 0.2); }
+#wmq-stats .wmq-st small { font-size: 10px; font-weight: 600; color: #9ca3af; text-transform: uppercase; letter-spacing: 0.05em; white-space: nowrap; }
+#wmq-stats .wmq-st b { font-size: 16px; font-weight: 700; color: #34d399; white-space: nowrap; }
+
+#wmq-top .wmq-est { padding: 12px; }
+#wmq-top .wmq-est-big { text-align: center; padding: 6px 0 14px; }
+#wmq-top .wmq-est-big small { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: #9ca3af; }
+#wmq-top .wmq-est-big b { display: block; font-size: 30px; line-height: 1.25; color: #34d399; }
+#wmq-top .wmq-est-big span { font-size: 11px; opacity: 0.55; }
+#wmq-top .wmq-est-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+#wmq-top .wmq-est-card { min-width: 0; padding: 8px; border-radius: 10px; background: #161816; border: 1px solid rgba(255, 255, 255, 0.1); }
+#wmq-top .wmq-est-card small { display: block; font-size: 10px; text-transform: uppercase; letter-spacing: 0.04em; color: #9ca3af; }
+#wmq-top .wmq-est-card b { display: block; font-size: 18px; color: #e5e7eb; }
+#wmq-top .wmq-est-card em { display: block; font-size: 10px; font-style: normal; opacity: 0.55; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+#wmq-top .wmq-est-cov { margin-top: 14px; }
+#wmq-top .wmq-est-cov small { font-size: 10px; text-transform: uppercase; letter-spacing: 0.05em; color: #9ca3af; }
+#wmq-top .wmq-bar-track { height: 6px; margin: 6px 0; border-radius: 3px; background: #2a2d2a; overflow: hidden; }
+#wmq-top .wmq-bar-fill { height: 100%; background: #34d399; }
+#wmq-top .wmq-est-cov p { margin: 0; font-size: 12px; opacity: 0.8; }
+#wmq-top .wmq-est-facts { display: grid; grid-template-columns: 1fr auto; gap: 4px 12px; margin-top: 14px; }
+#wmq-top .wmq-est-facts span { opacity: 0.7; }
+#wmq-top .wmq-est-facts b { color: #e5e7eb; text-align: right; }
+#wmq-top .wmq-est-table { display: grid; grid-template-columns: 1fr auto auto auto; gap: 4px 14px; margin-top: 14px; }
+#wmq-top .wmq-est-table small { font-size: 10px; text-transform: uppercase; letter-spacing: 0.04em; color: #9ca3af; text-align: right; }
+#wmq-top .wmq-est-table small:first-child { text-align: left; }
+#wmq-top .wmq-est-table span { text-align: right; color: #e5e7eb; }
+#wmq-top .wmq-est-table .wmq-rar { text-align: left; font-weight: 700; color: #34d399; }
+
+/* v0.7 : overlay Top global (toutes pages) */
+#wmq-global-top {
+  width: 100%;
+  margin-bottom: 18px;
+  background: rgba(12, 13, 12, 0.96);
+  border: 1px solid rgba(251, 191, 36, 0.35);
+  border-radius: 14px;
+  overflow: hidden;
+  font: 500 13px/1.4 system-ui, sans-serif;
+  color: #e5e7eb;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.45);
+}
+
+.wmq-gt-header {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  padding: 10px 16px;
+  background: rgba(251, 191, 36, 0.10);
+  border-bottom: 1px solid rgba(251, 191, 36, 0.25);
+  font-weight: 700;
+  color: #fbbf24;
+}
+
+.wmq-gt-sub {
+  font-size: 11px;
+  font-weight: 500;
+  opacity: 0.65;
+  color: #e5e7eb;
+}
+
+.wmq-gt-list {
+  margin: 0;
+  padding: 6px 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 0;
+}
+
+.wmq-gt-item {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 14px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  transition: background 0.15s;
+}
+
+.wmq-gt-item:hover { background: rgba(255,255,255,0.04); }
+
+.wmq-gt-rank {
+  font-size: 10px;
+  font-weight: 700;
+  color: #6b7280;
+  min-width: 18px;
+  text-align: right;
+  counter-increment: wmq-rank;
+}
+.wmq-gt-rank::before { content: counter(wmq-rank); }
+.wmq-gt-list { counter-reset: wmq-rank; }
+
+/* top 3 dorés */
+.wmq-gt-item:nth-child(1) .wmq-gt-rank { color: #fbbf24; font-size: 12px; }
+.wmq-gt-item:nth-child(2) .wmq-gt-rank { color: #d1d5db; }
+.wmq-gt-item:nth-child(3) .wmq-gt-rank { color: #cd7c3a; }
+
+.wmq-gt-name {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 12px;
+}
+.wmq-gt-rar {
+  font-size: 10px;
+  opacity: 0.55;
+  font-weight: 600;
+}
+.wmq-gt-price {
+  font-weight: 700;
+  color: #34d399;
+  white-space: nowrap;
+  font-size: 12px;
+}
+.wmq-gt-x {
+  color: #fbbf24;
+  font-weight: 700;
+  font-size: 11px;
+}
+
+/* v0.6.2 : l'en-tête reste au-dessus du contenu qui défile (les éléments semi-transparents le recouvraient) */
+#wmq-top .wmq-top-head { z-index: 10; isolation: isolate; background: #111; }
+#wmq-top .wmq-top-head::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 1px; background: rgba(255, 255, 255, 0.12);
+}
+
+/* v0.8.5 : Cadrage strict et thèmes officiels pour les cartes injectées (Top Global) */
+[data-wmq-injected] {
+  position: relative !important;
+  overflow: hidden !important;
+  display: flex !important;
+  flex-direction: column !important;
+  border-radius: 14px !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+  box-sizing: border-box !important;
+}
+
+[data-wmq-injected]:hover {
+  transform: translateY(-4px) !important;
+  z-index: 20 !important;
+}
+
+/* Thèmes par rareté pour les cartes injectées */
+[data-wmq-injected][data-wmq-rarity="C"] {
+  border: 1.5px solid #b8f2d5 !important;
+  box-shadow: 0 0 12px rgba(184, 242, 213, 0.3) !important;
+  background: linear-gradient(180deg, #18221c 0%, #0d1410 100%) !important;
+}
+[data-wmq-injected][data-wmq-rarity="PC"] {
+  border: 1.5px solid #b1cff2 !important;
+  box-shadow: 0 0 14px rgba(177, 207, 242, 0.35) !important;
+  background: linear-gradient(180deg, #132238 0%, #0c1420 100%) !important;
+}
+[data-wmq-injected][data-wmq-rarity="R"] {
+  border: 1.5px solid #c6a7f2 !important;
+  box-shadow: 0 0 16px rgba(198, 167, 242, 0.4) !important;
+  background: linear-gradient(180deg, #251838 0%, #130d20 100%) !important;
+}
+[data-wmq-injected][data-wmq-rarity="SR"] {
+  border: 1.5px solid #ed6fa3 !important;
+  box-shadow: 0 0 18px rgba(237, 111, 163, 0.45) !important;
+  background: linear-gradient(180deg, #3d1527 0%, #1f0b14 100%) !important;
+}
+[data-wmq-injected][data-wmq-rarity="UR"] {
+  border: 1.5px solid #fa9931 !important;
+  box-shadow: 0 0 20px rgba(250, 153, 49, 0.5) !important;
+  background: linear-gradient(180deg, #3d2010 0%, #1f1008 100%) !important;
+}
+[data-wmq-injected][data-wmq-rarity="L"] {
+  border: 1.5px solid #ffe144 !important;
+  box-shadow: 0 0 22px rgba(255, 225, 68, 0.55) !important;
+  background: linear-gradient(180deg, #382c0b 0%, #1c1605 100%) !important;
+}
+
+/* Cadre illustration standard WikiMasters (empêche le zoom et l'étalement full screen) */
+.wmq-art-frame {
+  position: relative !important;
+  width: 100% !important;
+  height: 118px !important;
+  min-height: 118px !important;
+  max-height: 118px !important;
+  overflow: hidden !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: rgba(0, 0, 0, 0.45) !important;
+  border-top-left-radius: 12px !important;
+  border-top-right-radius: 12px !important;
+  flex-shrink: 0 !important;
+}
+
+.wmq-art-img {
+  position: relative !important;
+  inset: auto !important;
+  top: auto !important;
+  bottom: auto !important;
+  left: auto !important;
+  right: auto !important;
+  width: auto !important;
+  height: auto !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+  object-fit: contain !important;
+  display: block !important;
+  margin: auto !important;
+  z-index: 2 !important;
+}
+
+/* Zone textuelle d'une carte injectée */
+.wmq-card-body {
+  position: relative !important;
+  padding: 6px 10px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: flex-start !important;
+  flex: 1 1 auto !important;
+  min-height: 55px !important;
+  z-index: 3 !important;
+}
+
+.wmq-card-title {
+  font-weight: 700 !important;
+  font-size: 13px !important;
+  line-height: 1.25 !important;
+  color: #ffffff !important;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9) !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2 !important;
+  -webkit-box-orient: vertical !important;
+}
+
+.wmq-card-desc {
+  font-size: 10.5px !important;
+  line-height: 1.25 !important;
+  opacity: 0.85 !important;
+  margin-top: 2px !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2 !important;
+  -webkit-box-orient: vertical !important;
+}
+

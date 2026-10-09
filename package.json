@@ -1,0 +1,11 @@
+{
+  "name": "wm-qol",
+  "version": "0.8.5",
+  "description": "Wiki Masters QoL - Prix du marché",
+  "scripts": {
+    "build": "node build.js",
+    "package": "node build.js"
+  },
+  "author": "Kitsoune",
+  "license": "MIT"
+}

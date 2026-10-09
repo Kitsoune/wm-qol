@@ -4,7 +4,8 @@
   "description": "Wiki Masters QoL - Prix du marché",
   "scripts": {
     "build": "node build.js",
-    "package": "node build.js"
+    "package": "node build.js",
+    "release": "node build.js && node release.js"
   },
   "author": "Kitsoune",
   "license": "MIT"
